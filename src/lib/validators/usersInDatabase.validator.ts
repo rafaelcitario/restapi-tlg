@@ -6,6 +6,6 @@ export async function validateUsersInDatabase(
 ): Promise<string | null> {
   const db = await database()
   const user = await db.all('select * from users where id = ?', [params.id])
-  if (user.length !== 0) return 'OK'
+  if (user.length > 0) return 'OK'
   return null
 }

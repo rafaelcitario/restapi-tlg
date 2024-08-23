@@ -9,7 +9,7 @@ export async function updateUsersService(
 ): Promise<200 | null> {
   const db = await database()
   const dbActionReturn = await validateUsersInDatabase(params)
-  if (dbActionReturn === 'OK') {
+  if (dbActionReturn !== null) {
     db.run('UPDATE users SET name = ? WHERE id = ?', [body.name, params.id])
     return 200
   }

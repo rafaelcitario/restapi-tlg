@@ -19,10 +19,12 @@ export async function handleUpdateUsersController(app: FastifyInstance) {
           return reply.status(400).send('Invalid body')
 
         // passando id de parametros e body para o service de atualização
-        await updateUsersService(validatedParams, validateBodySchema)
+        const updateOrNull = await updateUsersService(
+          validatedParams,
+          validateBodySchema,
+        )
 
-        const codeStatus =
-          validatedParams !== null && validateBodySchema !== null ? 200 : 400
+        const codeStatus = updateOrNull !== null ? 200 : 400
         const message =
           codeStatus === 200
             ? 'Updated'
